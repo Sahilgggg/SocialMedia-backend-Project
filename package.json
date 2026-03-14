@@ -1,0 +1,16 @@
+{
+  "name": "socialmediaproject",
+  "version": "1.0.0",
+  "description": "full stack backend project",
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "license": "ISC",
+  "author": "Sahil Kumar Singh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
