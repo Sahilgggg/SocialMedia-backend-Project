@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         type:String,
         required:true,
     },
-    converImage:{
+    coverImage:{
         type:String,
     },
     watchHistory:[
@@ -49,13 +49,11 @@ const UserSchema = new Schema({
 
 //pre hook is used to hash the user password before saving it to the database
 //hash helps to protect user password
-UserSchema.pre("save",async function (next) {
-    if(!this.isModified("password"))return next();
-    this.password = await bcrypt.hash(this.password,10)
-    next()
-    //next is a callbackfunction that is called after the pre hook is executed.
-    //here 10 is the salt rounds and salt is used to add random data to the password before hashing it
-})
+UserSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;
+    this.password = await bcrypt.hash(this.password, 10);
+});
+
 UserSchema.methods.isPasswordCorrect = async function (password) {
 return await bcrypt.compare(password,this.password)
 }
@@ -75,7 +73,7 @@ UserSchema.methods.genrateAccessToken = function(){
 }
 
 UserSchema.methods.genrateRefreshToken = function(){
-    return jwt.sigh(
+    return jwt.sign(
         {
             _id:this._id,
         },
