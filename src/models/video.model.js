@@ -28,8 +28,14 @@ const  VideoSchema = new Schema({
     ispublished:{
         type:Boolean,
         default:false
-    }
-})
+    },
+    owner: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+
+},{timestamps:true}
+)
 VideoSchema.plugin(mongooseAggregatePaginate)
 //the mongoose-aggregate-paginate is a plugin for mongoose that provides pagination capabilities for aggregate queries.
 export const Video = mongoose.model('Video', VideoSchema)
